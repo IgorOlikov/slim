@@ -1,34 +1,47 @@
 <?php
 
 use App\Controllers\HomeController;
+use DI\Bridge\Slim\Bridge;
+use Slim\Factory\AppFactory;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Factory\AppFactory;
-use DI\Container;
 use Slim\Views\Twig;
-
-require __DIR__ . '/../vendor/autoload.php';
-
-$container = new Container();
-
-$container->set('Twig', Twig::class);
-
-AppFactory::setContainer($container);
+use Slim\Views\TwigMiddleware;
 
 
-$app = AppFactory::create();
+$container = require '../src/Container/bootstrap.php';
 
 
-//dd($app->getContainer());
+
+$twig = Twig::create(__DIR__ . '/../src/Templates',['cache' => false]);
 
 
-$app->get('/', function (Request $request, Response $response, $args,Twig $twig) {
-    $response->getBody()->write("Hello world!");
+
+$app = Bridge::create($container);
+
+$app->add(TwigMiddleware::create($app,$twig));
+
+//dd($app);
+
+
+$app->get('/home',[HomeController::class,'index']);
+
+
+$app->get('/', function (Request $request, Response $response) {
+
+    $view = Twig::fromRequest($request);
+    return $view->render($response,'test.html');
+
+   $queryBuilder = $this->get('DatabaseConnection')->getQueryBuilder();
+
+   $queryBuilder->select('*')->from('posts');
+   $result  = $queryBuilder->executeQuery()->fetchAssociative();
+
+
+    $response->getBody()->write(json_encode($result));
     //$twig->render();//
     return $response;
 });
-
-$app->get('/home',[HomeController::class,'index']);
 
 
 
