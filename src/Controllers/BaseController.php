@@ -2,23 +2,31 @@
 
 namespace App\Controllers;
 
+
 use App\Database\DatabaseConnection;
+use DI\Attribute\Inject;
+use Slim\App;
 use Slim\Views\Twig;
+
 
 class BaseController
 {
 
     protected DatabaseConnection $connection;
-    //protected Twig $twig;
+    protected App $app;
+    protected Twig $twig;
 
     public function __construct(
         DatabaseConnection $connection,
-       //Twig $twig
-       // Twig $twig,
+       App $app,
+
     )
     {
         $this->connection = $connection;
-        //$this->twig = $twig;
+        $this->app = $app;
+        $this->twig = $app->getContainer()->get('view');
+
+
     }
 
 
