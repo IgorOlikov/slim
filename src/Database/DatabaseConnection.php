@@ -8,7 +8,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 class DatabaseConnection
 {
-    private $qb;
+    public $queryBuilder;
     private $conn;
     private $connectionParams;
 
@@ -21,13 +21,9 @@ class DatabaseConnection
 
         $this->conn = DriverManager::getConnection($this->connectionParams);
 
-        $this->qb = $this->conn->createQueryBuilder();
+        $this->queryBuilder = $this->conn->createQueryBuilder();
     }
 
-    public function getQueryBuilder() : QueryBuilder
-    {
-        return $this->qb;
-    }
 
 
 }

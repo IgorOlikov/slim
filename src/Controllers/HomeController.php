@@ -10,11 +10,9 @@ class HomeController extends BaseController
     public function index(Request $request,Response $response)
     {
 
-       $queryBuilder = $this->connection->getQueryBuilder();
+        $this->queryBuilder->select('*')->from('posts');
 
-        $queryBuilder->select('*')->from('posts');
-
-        $result  = $queryBuilder->executeQuery()->fetchAssociative();
+        $result = $this->queryBuilder->executeQuery()->fetchAssociative();
 
         return $this->twig->render($response,'test.html',['title' => $result['title']]);
 
