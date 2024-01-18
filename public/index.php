@@ -27,20 +27,19 @@ $app->add(TwigMiddleware::create($app,$twig));
 $app->get('/home',[HomeController::class,'index']);
 
 
-$app->get('/', function (Request $request, Response $response) {
+$app->get('/', function (Request $request, Response $response, \App\Database\DatabaseConnection $connection) {
 
     $view = Twig::fromRequest($request);
-    return $view->render($response,'test.html');
 
-   $queryBuilder = $this->get('DatabaseConnection')->getQueryBuilder();
+
+   $queryBuilder = $connection->getQueryBuilder();
 
    $queryBuilder->select('*')->from('posts');
    $result  = $queryBuilder->executeQuery()->fetchAssociative();
 
-
-    $response->getBody()->write(json_encode($result));
-    //$twig->render();//
-    return $response;
+    return $view->render($response,'test.html',['title' => $result['title']]);
+    //$response->getBody()->write(json_encode($result));
+    //return $response;
 });
 
 
