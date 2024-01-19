@@ -93,8 +93,9 @@ const getStudents = async () => {
         } else {
             for (var i in output) {
                 tr += `
-            <tr>
-            <td>${parseInt(i) + 1}</td>
+            <tr>   
+                   
+            <td>${output[i].id}</td>
             <td>${output[i].name}</td>
             <td>${output[i].age}</td>
             <td>${output[i].country}</td>
@@ -141,8 +142,8 @@ update.addEventListener("click", async () => {
     let age = document.querySelector("#edit_age").value;
     let country = document.querySelector("#edit_country").value;
 
-    const res = await fetch("php/update-data.php", {
-        method: "POST",
+    const res = await fetch("http://localhost/students/update", {
+        method: "PUT",
         body: JSON.stringify({
             "id": id,
             "name": name,
@@ -179,8 +180,8 @@ update.addEventListener("click", async () => {
 // delete student
 
 const deleteStudent = async (id) => {
-    const res = await fetch("http://localhost/students/" + id, {
-        method: "GET",
+    const res = await fetch("http://localhost/students/delete/" + id, {
+        method: "DELETE",
     });
     const output = await res.json();
     if (output.success) {

@@ -21,9 +21,9 @@ $app->post('/students',[HomeController::class,'store']);
 
 $app->get('/students/{id}',[HomeController::class,'show']);
 
-$app->put('/update/{id}',[HomeController::class,'update']);
+$app->put('/students/update',[HomeController::class,'update']);
 
-$app->delete('/delete/{id}',[HomeController::class,'delete']);
+$app->delete('/students/delete/{id}',[HomeController::class,'delete']);
 
 
 $app->run();
