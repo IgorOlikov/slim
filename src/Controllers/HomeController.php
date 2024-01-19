@@ -11,18 +11,49 @@ class HomeController extends BaseController
     {
 
 
-        $this->queryBuilder->select('*')->from('posts');
+        $this->queryBuilder->select('*')->from('students');
 
-        $result = $this->queryBuilder->executeQuery()->fetchAssociative();
+        $result = $this->queryBuilder->executeQuery()->fetchAllAssociative();
 
-        return $this->twig->render($response,'test.html',['title' => $result['title']]);
+        //dd($result);
 
-        $response->getBody()->write(json_encode($result));
+        //$result = $response->getBody()->write(json_encode($result));
 
-        return $response;
-
+        return $this->twig->render($response,'test.html.twig');
+        //return $response;
 
     }
+
+
+    public function json(Request $request, Response $response)
+    {
+        $this->queryBuilder->select('*')->from('students');
+
+        $result = $this->queryBuilder->executeQuery()->fetchAllAssociative();
+
+         $response->getBody()->write(json_encode($result));
+        return $response;
+    }
+
+    public function store(Request $request,Response $response)
+    {
+
+    }
+    public function show(Request $request,Response $response)
+    {
+
+    }
+    public function update(Request $request,Response $response)
+    {
+
+    }
+
+    public function delete(Request $request,Response $response)
+    {
+
+    }
+
+
 
 
 }
