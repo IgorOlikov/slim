@@ -7,6 +7,7 @@ use Slim\Views\TwigMiddleware;
 $container = require '../src/Container/bootstrap.php';
 
 $app = Bridge::create($container);
+
 $app->add(TwigMiddleware::class);
 
 

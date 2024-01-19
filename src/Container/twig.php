@@ -14,4 +14,8 @@ return [
         TwigMiddleware::class => function (ContainerInterface $container){
             return TwigMiddleware::createFromContainer($container->get(App::class));
     },
+
+    Twig::class => function(){
+        return Twig::create('/app/src/Templates',['cache => false']);
+        }
 ];

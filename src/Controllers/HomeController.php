@@ -10,6 +10,7 @@ class HomeController extends BaseController
     public function index(Request $request,Response $response)
     {
 
+
         $this->queryBuilder->select('*')->from('posts');
 
         $result = $this->queryBuilder->executeQuery()->fetchAssociative();
