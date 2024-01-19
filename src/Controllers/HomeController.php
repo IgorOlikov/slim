@@ -24,8 +24,19 @@ class HomeController extends BaseController
 
     }
 
+    public function studentsCount(Request $request, Response $response)
+    {
+        $this->queryBuilder->select('*')->from('students');
 
-    public function json(Request $request, Response $response)
+        $result = $this->queryBuilder->executeQuery()->rowCount();
+
+        $response->getBody()->write(json_encode($result));
+        return $response;
+    }
+
+
+
+    public function students(Request $request, Response $response)
     {
         $this->queryBuilder->select('*')->from('students');
 

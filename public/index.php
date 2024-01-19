@@ -13,7 +13,9 @@ $app->add(TwigMiddleware::class);
 
 $app->get('/',[HomeController::class,'index']);
 
-$app->get('/json',[HomeController::class,'json']);
+$app->get('/students',[HomeController::class,'students']);
+
+$app->get('/students-count',[HomeController::class,'studentsCount']);
 
 $app->post('/store/{id}',[HomeController::class,'store']);
 

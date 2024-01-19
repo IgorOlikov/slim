@@ -80,7 +80,7 @@ const getStudents = async () => {
     try {
         const tbody = document.querySelector("#tbody");
         let tr = "";
-        const res = await fetch("http://localhost/json", {
+        const res = await fetch("http://localhost/students", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -206,7 +206,7 @@ const deleteStudent = async (id) => {
 
 const getTotalCount = async () => {
     let total = document.querySelector("#total");
-    const res = await fetch("php/get-total-count.php", {
+    const res = await fetch("http://localhost/students-count", {
         method: "GET"
     })
     const output = await res.json();
