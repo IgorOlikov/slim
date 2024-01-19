@@ -30,7 +30,7 @@ save.addEventListener("click", async () => {
         let country = document.querySelector("#country").value;
 
 
-        const res = await fetch("php/insert-data.php", {
+        const res = await fetch("http://localhost/students", {
             method: "POST",
             body: JSON.stringify({ "name": name, "age": age, "country": country }),
             headers: {
@@ -117,7 +117,7 @@ getStudents();
 const editStudent = async (id) => {
     update_model.style.display = "flex";
 
-    const res = await fetch(`php/edit-data.php?id=${id}`, {
+    const res = await fetch(`http://localhost/students/${id}`, {
         method: "GET",
         headers: { 'Content-Type': 'application/json' }
     })
@@ -125,9 +125,9 @@ const editStudent = async (id) => {
     if (output["empty"] !== "empty") {
         for (var i in output) {
             document.querySelector("#id").value = output[i].id
-            document.querySelector("#edit_name").value = output[i].std_name
-            document.querySelector("#edit_age").value = output[i].std_age
-            document.querySelector("#edit_country").value = output[i].std_country
+            document.querySelector("#edit_name").value = output[i].name
+            document.querySelector("#edit_age").value = output[i].age
+            document.querySelector("#edit_country").value = output[i].country
         }
     }
 
@@ -179,7 +179,7 @@ update.addEventListener("click", async () => {
 // delete student
 
 const deleteStudent = async (id) => {
-    const res = await fetch("php/delete-data.php?id=" + id, {
+    const res = await fetch("http://localhost/students/" + id, {
         method: "GET",
     });
     const output = await res.json();

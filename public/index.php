@@ -17,9 +17,9 @@ $app->get('/students',[HomeController::class,'students']);
 
 $app->get('/students-count',[HomeController::class,'studentsCount']);
 
-$app->post('/store/{id}',[HomeController::class,'store']);
+$app->post('/students',[HomeController::class,'store']);
 
-$app->get('/show/{id}',[HomeController::class,'show']);
+$app->get('/students/{id}',[HomeController::class,'show']);
 
 $app->put('/update/{id}',[HomeController::class,'update']);
 
